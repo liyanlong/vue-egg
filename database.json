@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "driver": "mysql",
+    "host": "localhost",
+    "database": "db_dev",    
+    "user": "db_dev",
+    "password": "db_dev",
+    "multipleStatements": true
+  },
+  "test": {
+    "driver": "mysql",
+    "host": "localhost",
+    "database": "db_test",    
+    "user": "db_test",
+    "password": "db_test",
+    "multipleStatements": true
+  },
+  "prod": {
+    "driver": "mysql",
+    "user": {"ENV": "PRODUCTION_USERNAME"},
+    "password": {"ENV": "PRODUCTION_PASSWORD"}
+  }
+}
