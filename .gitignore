@@ -5,7 +5,10 @@ yarn-debug.log*
 yarn-error.log*
 package-lock.json
 /assets/
-
+install/run/
+install/logs/
+server/run/
+server/logs/
 # Editor directories and files
 .idea
 .vscode

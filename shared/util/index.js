@@ -42,10 +42,10 @@ function def(o, name, value) {
  * @param {*} callback 
  */
 function map (arr, callback) {
-  let res = []
-  let kValue, mappedValue
+  var res = [];
+  var kValue, mappedValue;
 
-  for (let k = 0, len = arr.length; k < len; k++) {
+  for (var k = 0, len = arr.length; k < len; k++) {
     if ((typeof arr === 'string' && !!arr.charAt(k))) {
       kValue = arr.charAt(k);
       mappedValue = callback(kValue, k, arr);
@@ -59,12 +59,15 @@ function map (arr, callback) {
   return res;
 }
 
-function camelCaseToUnderline (str, isVariable = true) {
-  let firstChar = str.charAt(0);
+function camelCaseToUnderline (str, isVariable) {
+  if (isUndefine(isVariable)) {
+    isVariable = true;
+  }
+  var firstChar = str.charAt(0);
   if (isVariable) {
     firstChar = firstChar.toLocaleLowerCase();
   }
-  return firstChar + str.substr(1).replace(/([A-Z])/g, function (char) {
+  return firstChar + str.substr(1).replace(/[A-Z]/g, function (char) {
     return '_' + char.toLocaleLowerCase();
   });
 }
@@ -77,18 +80,17 @@ function undef(o, name) {
     o[name] = null;
   }
 }
-
 module.exports = {
-  noop,
-  isArray,
-  isObject,
-  isString,
-  isDefine,
-  isUndefine,
-  isClient,
-  isNative,
-  map,
-  camelCaseToUnderline,
-  def,
-  undef
+  noop: noop,
+  isArray: isArray,
+  isObject: isObject,
+  isString: isString,
+  isDefine: isDefine,
+  isUndefine: isUndefine,
+  isClient: isClient,
+  isNative: isNative,
+  map: map,
+  camelCaseToUnderline: camelCaseToUnderline,
+  def: def,
+  undef: undef
 };

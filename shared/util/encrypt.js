@@ -39,7 +39,7 @@ Base64.prototype.decode = (function () {
     return String.fromCharCode(byte);
   }
   return function base64Decode(b64Str) {
-    let arr = base64js.toByteArray(b64Str)
+    var arr = base64js.toByteArray(b64Str);
     return map(arr, fromCharCode).join('');
   }
 })();
@@ -48,5 +48,5 @@ Base64.encode = Base64.prototype.encode;
 Base64.decode = Base64.prototype.decode;
 
 module.exports = {
-  Base64
+  Base64: Base64
 }

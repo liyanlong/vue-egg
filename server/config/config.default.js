@@ -3,7 +3,7 @@ const sharedConfig = require('../../shared/config');
 
 module.exports = appInfo => {
   return {
-    keys: 'sopr',
+    keys: 'vue-egg-server',
     middleware: ['authentication'],
     notfound: {
       pageUrl: '/error/404.html'

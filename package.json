@@ -5,10 +5,11 @@
   "author": " liyl <295697141@qq.com>",
   "private": true,
   "scripts": {
+    "db-migrate": "db-migrate --env dev up",    
     "client:dev": "node client/build/dev-server.js",
     "client:build": "node client/build/build.js",
-    "client:unit": "cross-env BABEL_ENV=test karma start test/client/unit/karma.conf.js --single-run",
-    "client:e2e": "node test/client//e2e/runner.js",
+    "client:unit": "cross-env BABEL_ENV=test karma start client/test/unit/karma.conf.js --single-run",
+    "client:e2e": "node client/test/e2e/runner.js",
     "client:test": "npm run client:unit && npm run client:e2e",
     "client:lint": "eslint --ext .js,.vue client/src test/client/unit/specs test/client/e2e/specs",
     "server:dev": "egg-bin dev --baseDir=server --port=3000",

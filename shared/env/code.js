@@ -3,11 +3,11 @@ const def = util.def;
 const camelCaseToUnderline = util.camelCaseToUnderline;
 
 function addEnvCode (env) {
-  let args = Array.prototype.slice.call(arguments, 1);
-  for (let i = 0, len = args.length; i < len; i++) {
-    let obj = args[i];
-    let keys = Object.keys(obj);
-    keys.forEach((key) => {
+  var arr = Array.prototype.slice.call(arguments, 1);
+  for (var i = 0, len = arr.length; i < len; i++) {
+    var obj = arr[i];
+    var keys = Object.keys(obj);
+    keys.forEach(function (key) {
       if (obj && obj.hasOwnProperty(key)) {
         if (env[key] === undefined) {
           env[key] = obj[key];
@@ -37,11 +37,11 @@ const appEnv = {
 
 module.exports = {
   envCode: addEnvCode({}, basicEnv, appEnv),
-  get (name) {
+  get: function (name) {
     name = camelCaseToUnderline(name).toUpperCase();
     return this.envCode[name];
   },
-  equal (code, name) {
+  equal: function (code, name) {
     return this.get(name) === code
   }
 }

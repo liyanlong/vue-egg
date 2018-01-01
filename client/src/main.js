@@ -4,11 +4,10 @@ import App from './App'
 import router from './router'
 import store from './store'
 
-import plugin from './plugin'
+import './styles/index.scss'
+import './plugin'
 
 Vue.config.productionTip = false
-
-Vue.use(plugin)
 
 sync(store, router)
 /* eslint-disable no-new */

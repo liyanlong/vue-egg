@@ -1,0 +1,4 @@
+.DS_Store
+unit/coverage
+e2e/reports
+selenium-debug.log

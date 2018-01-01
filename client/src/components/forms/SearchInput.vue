@@ -24,10 +24,14 @@
   export default {
     props: {
       'suffix': {
-        type: Boolean
+        type: Boolean,
+        default: false,
+        required: false
       },
       'prefix': {
-        type: Boolean
+        type: Boolean,
+        default: false,
+        required: false
       },
       'icon-class': {
         type: String,
@@ -90,20 +94,12 @@ $hover-color: #fff;
     outline: none;
     position: absolute;
     right: 0;
-
   }
   .vg-search-text {
-    
     &:hover {
       color: $hover-color;
     }
   }
 }
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .3s ease;
-}
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
 </style>

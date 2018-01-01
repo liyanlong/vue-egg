@@ -2,6 +2,7 @@
   "dev": {
     "driver": "mysql",
     "host": "localhost",
+    "port": 3306,
     "database": "db_dev",    
     "user": "db_dev",
     "password": "db_dev",
@@ -10,6 +11,7 @@
   "test": {
     "driver": "mysql",
     "host": "localhost",
+    "port": 3306,    
     "database": "db_test",    
     "user": "db_test",
     "password": "db_test",

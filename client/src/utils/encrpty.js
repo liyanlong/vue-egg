@@ -1,1 +1,1 @@
-export * from 'share/util/encrpty'
+export * from 'shared/util/encrypt'

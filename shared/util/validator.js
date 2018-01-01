@@ -17,7 +17,7 @@ const sharedRule = {
    * 
    * @return {boolean}
    */
-  username (input) {
+  username: function (input) {
     // 用户名格式要求
     // 字母，数字，下划线，减号
     return /^[a-zA-Z0-9_-]{4,16}$/.test(input)
