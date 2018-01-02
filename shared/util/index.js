@@ -19,10 +19,6 @@ function isUndefine (o) {
   return Object.prototype.toString.apply(o) === '[object Undefined]';  
 }
 
-function isClient () {
-  return typeof window === 'object' && isNative(window.constructor)
-}
-
 function isNative (fn) {
   return /native code/.test(fn.toString());
 }
@@ -87,7 +83,6 @@ module.exports = {
   isString: isString,
   isDefine: isDefine,
   isUndefine: isUndefine,
-  isClient: isClient,
   isNative: isNative,
   map: map,
   camelCaseToUnderline: camelCaseToUnderline,
