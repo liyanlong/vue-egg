@@ -1,7 +1,18 @@
 const path = require('path');
 const sharedConfig = require('../../shared/config');
+const dbConfig = require('../../config/database.js');
+
+function getDbConfig (config, env) {
+  const envAdapter = {
+    'local': 'development',
+    'test': 'test',
+    'prod': 'production'
+  };
+  return config[envAdapter[env]];
+}
 
 module.exports = appInfo => {
+  dbConfig['development']
   return {
     keys: 'vue-egg-server',
     middleware: ['authentication'],
@@ -46,6 +57,7 @@ module.exports = appInfo => {
     errorHandler: {
       match: '/api'
     },
-    sharedConfig: sharedConfig
+    sharedConfig: sharedConfig,
+    sequelize: getDbConfig(dbConfig, appInfo.env)
   }
 };

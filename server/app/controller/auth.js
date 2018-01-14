@@ -4,10 +4,10 @@ module.exports = app => {
 
   class AuthController extends app.BaseController {
 
-    async login ()　{
+    * login ()　{
       const {ctx} = this;
       const {username, password} = ctx.request.body;
-      const userinfo = await ctx.service.user.login(username, password);
+      const userinfo = yield ctx.service.user.login(username, password);
       if (userinfo) {
         // 快速验证是否登录
         ctx.cookies.set('islogin', 'true', {httpOnly: false});
@@ -22,7 +22,7 @@ module.exports = app => {
       ctx.setAuth(null);
       this.success();
     }
-    
+
     * info () {
       const {ctx} = this;
       this.success(ctx.getAuth());

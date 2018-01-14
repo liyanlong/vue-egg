@@ -29,8 +29,10 @@ module.exports = options => {
 
       // egg-validate 校验 参数异常
       if (status === 422) {
-        ctx.body.errCode = ctx.app.getEnvCode('INVALID_PARAM');
-        ctx.body.errMsg = '请求参数格式不正确';
+        const [errCode, errMsg] = ctx.app.getEnvCodeInfo('INVALID_PARAM');
+        ctx.body.errCode = errCode;
+        ctx.body.errMsg = errMsg;
+        
         // 错误栈 追加到 info 上
         ctx.body.info.errors = err.errors;
       }

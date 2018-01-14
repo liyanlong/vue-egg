@@ -7,7 +7,7 @@
 ```
   git clone https://github.com/liyanlong/vue-egg
   cd vue-egg
-
+  npm install
 ```
 
 2. 配置database.json
@@ -36,12 +36,14 @@
   }
 }
 ```
+
 3. 执行命令
 ```bash
-npm run db-migrate
+node_modules/.bin/sequelize db:migrate
+node_modules/.bin/sequelize db:seed:all
 ```
 
-4. 开发模式
-```bash
-npm run dev
-``` 
+## 运行
+```
+  npm run dev
+```

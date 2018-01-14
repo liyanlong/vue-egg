@@ -3,9 +3,9 @@ import {
   isProd,
   baseURL
 } from '@/utils/env'
-import sharedEnvCode from 'shared/env/code'
 import {Message} from 'element-ui'
 import router from '@/router'
+const sharedEnvCode = require('shared/env/code')
 
 const httpClient = axios.create({
   baseURL,
@@ -47,7 +47,7 @@ function handlerNotFound ({data}) {
 }
 
 function handlerError ({data}) {
-  if (!sharedEnvCode.equal(data.errCode, 'success') && data.errMsg) {
+  if (!sharedEnvCode.equalCode('success', data.errCode) && data.errMsg) {
     Message({
       message: `[handlerError]: ` + data.errMsg,
       type: 'error'
@@ -58,7 +58,7 @@ function handlerError ({data}) {
 export default httpClient
 
 export function handlerResponse (response) {
-  if (response.data && sharedEnvCode.equal(response.data.errCode, 'success')) {
+  if (response.data && sharedEnvCode.equalCode('success', response.data.errCode)) {
     return Promise.resolve(response.data)
   }
   return Promise.reject(response)

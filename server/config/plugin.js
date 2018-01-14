@@ -18,5 +18,9 @@ module.exports = {
   },
   userrole: {
     package: 'egg-userrole',
+  },
+  sequelize: {
+    enable: true,
+    package: 'egg-sequelize'
   }
 };

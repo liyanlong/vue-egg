@@ -1,2 +1,2 @@
-import validator from 'shared/util/validator'
+const validator = require('shared/util/validator')
 export default validator

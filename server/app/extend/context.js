@@ -18,5 +18,13 @@ module.exports = {
       val = null;
     }
     this[AUTH] = this.session.auth = val;
+  },
+
+  codeThrow(envCode = '') {
+    const [errCode, errMsg] = this.app.getEnvCodeInfo(envCode)
+    this.throw(200, null, {
+      errCode,
+      errMsg
+    })
   }
 }

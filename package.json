@@ -5,7 +5,7 @@
   "author": " liyl <295697141@qq.com>",
   "private": true,
   "scripts": {
-    "db-migrate": "db-migrate --env dev up",    
+    "db-migrate": "db-migrate --env dev up",
     "client:dev": "node client/build/dev-server.js",
     "client:build": "node client/build/build.js",
     "dev:test": "karma start client/test/unit/karma.dev.config.js",
@@ -23,10 +23,12 @@
     "axios": "^0.17.1",
     "egg": "^2.0.0",
     "egg-mysql": "^3.0.0",
+    "egg-sequelize": "^3.1.0",
     "egg-session": "^2.1.1",
     "egg-userrole": "^2.0.0",
     "egg-validate": "^1.0.0",
     "egg-view-nunjucks": "^2.1.4",
+    "mysql2": "^1.5.1",
     "node-sass": "^4.7.2"
   },
   "devDependencies": {

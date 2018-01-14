@@ -3,19 +3,21 @@ module.exports = function (app) {
 
   class BaseController extends app.Controller {
   
-    success (info = {}, errMsg = '') {
+    success (info = {}, localErrMsg = '') {
+      const [errCode, errMsg] = app.getEnvCodeInfo('success');
       this.ctx.body = {
-        errCode: app.getEnvCode('success'),
+        errCode,
         info,
-        errMsg
+        errMsg: localErrMsg || errMsg
       };
     }
-  
-    error (name, errMsg = 'Bad Request', info = {}) {
+
+    error (name, localErrMsg = 'Bad Request', info = {}) {
+      const [errCode, errMsg] = app.getEnvCodeInfo(name);
       this.ctx.body = {
-        errCode: app.getEnvCode(name),
+        errCode,
         info,
-        errMsg
+        errMsg: localErrMsg || errMsg
       };
     }
   }

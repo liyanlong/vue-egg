@@ -19,12 +19,9 @@ module.exports = options => {
     }
     ctx.cookies.set('islogin', '', {httpOnly: false});    
     if (ctx.acceptJSON) {
-      ctx.throw(401, null, {
-        errCode: ctx.app.envCode('AUTHORIZED_ERROR'),
-        errMsg: '用户登录信息已过期'
-      });
+      ctx.codeThrow('AUTHORIZED_ERROR');
     } else {
-      options.redirect && ctx.redirect(options.redirect)
+      options.redirect && ctx.redirect(options.redirect);
     }
   };
 };

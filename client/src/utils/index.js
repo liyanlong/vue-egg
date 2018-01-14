@@ -1,2 +1,5 @@
 export * from './env'
-export * from 'shared/util/index'
+const sharedUtil = require('shared/util')
+export default {
+  ...sharedUtil
+}

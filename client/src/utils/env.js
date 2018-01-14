@@ -6,6 +6,6 @@ export const isTest = NODE_ENV === 'test'
 
 export const baseURL = process.env.baseURL
 
-export const isClient = (function() {
-  return typeof window === 'object' && Object.prototype.toString.apply(o) === '[object Window]'
+export const isClient = (function () {
+  return typeof window === 'object' && Object.prototype.toString.apply(window) === '[object Window]'
 })()

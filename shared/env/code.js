@@ -21,14 +21,15 @@ function addEnvCode (env) {
 }
 
 const basicEnv = {
-  SUCCESS: 0,
-  LOGIN_ERROR: 100,
-  AUTHORIZED_ERROR: 101,
+  SUCCESS: [0, '请求成功'],
+  LOGIN_ERROR: [100, '登录失败'],
+  LOGIN_AUTHORIZED_ERROR: [101, '用户登录信息已过期'],
+  ACTIVATED_ERROR: [102, '用户被禁止冻结'],
   REST_CREATE_ERROR: 200,
   REST_READ_ERROR: 201,
   REST_UPDATE_ERROR: 202,
   REST_DELETE_ERROR: 203,
-  INVALID_PARAM: 300,
+  INVALID_PARAM: [300, '请求参数格式不正确'],
   NETWORK_ERROR: 501
 };
 
@@ -39,9 +40,32 @@ module.exports = {
   envCode: addEnvCode({}, basicEnv, appEnv),
   get: function (name) {
     name = camelCaseToUnderline(name).toUpperCase();
-    return this.envCode[name];
+    const [errCode, errMsg] = this.envCode[name];
+    return {
+      errCode,
+      errMsg
+    }
   },
-  equal: function (code, name) {
-    return this.get(name) === code
+  equalCode: function (code, name) {
+    const errInfo = this.get(name)
+    return errInfo['errorCode'] === code
+  }
+}
+module.exports = {
+  envCode: addEnvCode({}, basicEnv, appEnv),
+  getInfo: function (name) {
+    name = camelCaseToUnderline(name).toUpperCase();
+    return Array.isArray(this.envCode[name]) ? this.envCode[name] : [this.envCode[name]];
+  },
+  getErrCode: function (name) {
+    const [errCode] = this.getInfo(name);
+    return errCode;
+  },
+  getErrMsg: function (name) {
+    const [errCode, errMsg] = this.getInfo(name);
+    return errMsg;
+  },
+  equalCode: function (name, code) {
+    return this.getErrCode(name) === code
   }
 }
