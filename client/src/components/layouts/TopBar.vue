@@ -15,7 +15,7 @@
     </li>
     <el-menu-item index="/">首页</el-menu-item>
     <el-menu-item :index="mod.path" v-for="mod in modules" :key="mod.name">
-      {{mod.meta.title}}
+      {{mod.meta && mod.meta.name}}
     </el-menu-item>
     <slot name="right"></slot>
   </el-menu>

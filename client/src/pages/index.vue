@@ -1,7 +1,7 @@
 <template>
   <div class="app-layout">
     <top-bar class="app-topbar"
-      :modules="topbarModules" 
+      :modules="moduleMenus" 
       :active-index="activeModuleIndex" 
       @route-select="handlerSelect">
       <div slot="right" class="el_menu__right">
@@ -35,7 +35,7 @@ import {mapGetters} from 'vuex'
 export default {
   computed: {
     ...mapGetters({
-      topbarModules: 'menu/topbarModules',
+      moduleMenus: 'menu/moduleMenus',
       activeModuleMenus: 'menu/activeModuleMenus',
       activeModuleIndex: 'menu/activeModuleIndex',
       activeModuleMenuItemIndex: 'menu/activeModuleMenuItemIndex',
@@ -47,6 +47,9 @@ export default {
       username: 'Admin',
       searchText: ''
     }
+  },
+  created () {
+    console.log(this.activeModuleMenuItemIndex)
   },
   methods: {
     handlerSelect (key, keyPath) {
@@ -64,6 +67,11 @@ export default {
     TopBar,
     SideBar,
     SearchInput
+  },
+  watch: {
+    activeModuleMenuItemIndex (val) {
+      console.log(val)
+    }
   }
 }
 </script>

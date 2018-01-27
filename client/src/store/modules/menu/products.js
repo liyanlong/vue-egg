@@ -1,38 +1,40 @@
-import {createLazyLoadingFn} from './lazyLoading'
-import getMeta from './_meta'
+import {generateMenu} from './util'
 
-const localLazyLoading = createLazyLoadingFn('product')
-
-export default {
-  topbar: {
+export default generateMenu({
+  // 一级导航条
+  module: {
     name: 'product',
     path: '/product',
-    component: localLazyLoading('index'),
-    meta: getMeta('product', 'default')
+    categories: ['charts', 'forms', 'tables']
   },
-  categories: [
-    {id: 'product-charts', name: '数据图表', items: ['chart']},
-    {id: 'product-forms', name: '表单', items: ['form']},
-    {id: 'product-tables', name: '表格', items: ['table']}
-  ],
+  // 二级菜单栏 当前版本无路由
+  categories: {
+    charts: {
+      name: 'product-charts',
+      items: ['chart']
+    },
+    forms: {
+      name: 'product-forms',
+      items: ['form']
+    },
+    tables: {
+      name: 'product-tables',
+      items: ['table']
+    }
+  },
+  // 三级功能栏目
   items: {
     chart: {
       name: 'product-chart',
-      path: '/product/chart',
-      component: localLazyLoading('chart'),
-      meta: getMeta('product', 'chart')
+      path: '/product/chart'
     },
     form: {
       name: 'product-form',
-      path: '/product/form',
-      component: localLazyLoading('form'),
-      meta: getMeta('product', 'form')
+      path: '/product/form'
     },
     table: {
       name: 'product-table',
-      path: '/product/table',
-      component: localLazyLoading('table'),
-      meta: getMeta('product', 'table')
+      path: '/product/table'
     }
   }
-}
+})

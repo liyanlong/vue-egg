@@ -1,21 +1,20 @@
 <template>
-<el-submenu :index="subMenu.id" :key="subMenu.name">
+<el-submenu v-if="menuItem.children" :index="menuItem.path">
   <template slot="title">
-    <span>{{subMenu.name}}</span>
+    <span>{{menuItem.meta && menuItem.meta.name || menuItem.name}}</span>
   </template>
-  <template v-for="item in subMenu['children']">
-    <el-menu-item :index="item.path" :key="item.name">
-      {{item.meta.title}}
-    </el-menu-item>
-  </template>
+  <sub-menu v-for="item in menuItem.children" :menu-item="item" :key="item.name"></sub-menu>
 </el-submenu>
+<el-menu-item v-else :index="menuItem.path">
+  {{menuItem.meta && menuItem.meta.name || menuItem.name}}
+</el-menu-item>
 </template>
 
 <script>
 export default {
   name: 'SubMenu',
   props: {
-    subMenu: {
+    menuItem: {
       type: Object,
       required: true
     }

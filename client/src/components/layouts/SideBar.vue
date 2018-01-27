@@ -11,7 +11,7 @@
       :router="true"
       :default-active="activeIndex"
       menu-trigger="click">
-      <sub-menu :subMenu="subMenu" v-for="subMenu in menus" :key="subMenu.name"></sub-menu>
+      <sub-menu :menu-item="menuItem" v-for="menuItem in menus" :key="menuItem.name"></sub-menu>
     </el-menu>
   </div>
 </template>

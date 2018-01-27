@@ -3,18 +3,23 @@ import Cookie from 'js-cookie'
 const sharedEnvCode = require('shared/env/code')
 
 const state = {
-  _info: null
+  _info: null,
+  _permissions: null
 }
 
 const getters = {
   info: (state) => {
     return state._info
+  },
+  permissions: (state) => {
+    return state._permissions || {}
   }
 }
 
 const mutations = {
   setInfo (state, info) {
     state._info = info
+    state._permissions = JSON.parse(info.permissions)
   }
 }
 

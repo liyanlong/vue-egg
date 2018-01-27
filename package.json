@@ -5,7 +5,6 @@
   "author": " liyl <295697141@qq.com>",
   "private": true,
   "scripts": {
-    "db-migrate": "db-migrate --env dev up",
     "client:dev": "node client/build/dev-server.js",
     "client:build": "node client/build/build.js",
     "dev:test": "karma start client/test/unit/karma.dev.config.js",

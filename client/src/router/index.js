@@ -9,7 +9,7 @@ import store from '../store'
 Vue.use(Router)
 
 // 登录检查
-function requireLogin (to, from, next) {
+function requiredLogin (to, from, next) {
   const isLogin = !!Cookie.get('islogin')
   if (isLogin) {
     store.dispatch('auth/getInfo')
@@ -62,7 +62,7 @@ export const requiredLoginRoute = [{
     },
     ...generateMenuRoutes(menu.state.modules, [])
   ],
-  beforeEnter: requireLogin
+  beforeEnter: requiredLogin
 }]
 
 const router = new Router({
@@ -75,23 +75,9 @@ const router = new Router({
 })
 
 function generateMenuRoutes (modules, routes) {
-  for (let mod of modules) {
-    if (mod.topbar) {
-      routes.push(mod.topbar)
-    }
-    if (mod.items) {
-      generateItemRoutes(mod.items, routes)
-    }
-  }
-  return routes
-}
-
-function generateItemRoutes (items, routes) {
-  for (let key of Object.keys(items)) {
-    if (items[key]['component']) {
-      routes.push(items[key])
-    }
-  }
+  return [].concat.apply(routes, Object.keys(modules).map((moduleKey) => {
+    return modules[moduleKey].routes
+  }))
 }
 
 export default router

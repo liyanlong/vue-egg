@@ -41,7 +41,7 @@ function handlerRedirect (response) {
 
 function handlerNotFound ({data}) {
   Message({
-    message: `[handlerNotFound]: ` + data.errMsg || '404 NotFound',
+    message: `[handlerNotFound] ` + data.errMsg || '404 NotFound',
     type: 'error'
   })
 }
@@ -49,7 +49,7 @@ function handlerNotFound ({data}) {
 function handlerError ({data}) {
   if (!sharedEnvCode.equalCode('success', data.errCode) && data.errMsg) {
     Message({
-      message: `[handlerError]: ` + data.errMsg,
+      message: `[handlerError] ` + data.errMsg,
       type: 'error'
     })
   }
