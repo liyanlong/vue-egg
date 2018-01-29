@@ -5,6 +5,7 @@ const menuPermissions = (function createPermission(metaMap, prefixKey, permissio
     if (metaMap[key]['meta']) {
       createPermission(metaMap[key]['meta'], prefixKey + '.' + key, permissions)
     } else {
+      // 只获取子权限 product.charts 
       permissions.push({
         name: metaMap[key]['name'],
         code: prefixKey + '.' + key,

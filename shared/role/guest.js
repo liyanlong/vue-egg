@@ -1,6 +1,6 @@
 
 const permissions = [
-  {name: '访问权限', code: 'access', desc: '访问查询权限'},
+  {name: '访问权限', code: 'access', desc: '访问查询'},
 ];
 
 module.exports = {

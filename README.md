@@ -33,11 +33,14 @@
 }
 ```
 
-3. 执行命令
+3. db迁移命令
+
 ```bash
 node_modules/.bin/sequelize db:migrate
 node_modules/.bin/sequelize db:seed:all
 ```
+更多命令：[查看](https://github.com/sequelize/cli)
+
 
 ## 运行
 ```

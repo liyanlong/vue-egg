@@ -12,7 +12,6 @@ function getDbConfig (config, env) {
 }
 
 module.exports = appInfo => {
-  dbConfig['development']
   return {
     keys: 'vue-egg-server',
     middleware: ['authentication'],

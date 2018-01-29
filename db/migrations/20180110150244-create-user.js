@@ -22,17 +22,20 @@ module.exports = {
         type: STRING
       },
       permissions: {
-        type: TEXT
+        type: TEXT,
+        defaultValue: ''
       },
       is_activated: {
         type: BOOLEAN,
         defaultValue: 1
       },
       last_login: {
-        type: DATE
+        type: DATE,
+        allowNull: true        
       },
       is_admin: {
-        type: BOOLEAN
+        type: BOOLEAN,
+        defaultValue: 0
       },
       created_at: {
         allowNull: false,

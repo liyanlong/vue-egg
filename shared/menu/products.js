@@ -5,7 +5,7 @@ module.exports = {
     path: '/product',
     categories: ['charts', 'forms', 'tables']
   },
-  // 二级菜单栏 当前版本无路由
+  // 二级菜单栏 当前版本 categories 无路由
   categories: {
     charts: {
       name: 'product-charts',
