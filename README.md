@@ -14,12 +14,8 @@
 ```json
 {
   "dev": {
-    "driver": "mysql",
-    "host": "localhost",
-    "database": "db_dev",    
-    "user": "db_dev",
-    "password": "db_dev",
-    "multipleStatements": true
+    "dialect": "sqlite",
+    "storage": "path/to/database.sqlite"
   },
   "test": {
     "driver": "mysql",
