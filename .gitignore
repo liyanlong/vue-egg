@@ -1,14 +1,18 @@
+
 .DS_Store
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 package-lock.json
+
+runtime/
 /assets/
 install/run/
 install/logs/
 server/run/
 server/logs/
+
 # Editor directories and files
 .idea
 .vscode

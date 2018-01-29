@@ -1,12 +1,9 @@
+const path = require('path');
 
 module.exports = {
   "development": {
-    "username": "db_dev",
-    "host": "127.0.0.1",
-    "port": "3306",
-    "database": "db_dev", 
-    "password": "db_dev",
-    "dialect": "mysql"
+    "dialect": "sqlite",
+    "storage": path.resolve(__dirname, "../runtime/database.sqlite")
   },
   "test": {
     "username": "root",

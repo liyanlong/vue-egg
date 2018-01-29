@@ -2,9 +2,9 @@ const Service = require('egg').Service;
 
 class UserService extends Service {
   * find (uid) {
-    const {ctx} = this;
-    const user = yield ctx.db.query('select * from user where id = ?', uid);
-    return user;
+    return {
+      uid
+    };
   }
 
   * login (login, password) {
