@@ -1,6 +1,5 @@
 
 module.exports = app => {
-  const table = 'sopr_system_products';
   class Product extends app.Service {
 
     * find (id) {
