@@ -5,8 +5,7 @@ const isClient = env.isClient;
 const isNative = utils.isNative;
 const map = utils.map;
 
-function Base64 () {
-}
+function Base64 () {}
 
 Base64.prototype.encode = (function () {
 

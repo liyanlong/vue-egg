@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Cookie from 'js-cookie'
-import menu, {lazyLoading} from '@/store/modules/menu'
+import {menuRoutes} from '@/store/modules/menu'
+import lazyLoading from '@/utils/lazyLoading'
 import Index from '@/pages/index.vue'
 
 import store from '../store'
@@ -54,14 +55,11 @@ export const constantRouterMap = [
 export const requiredLoginRoute = [{
   path: '/',
   component: Index,
-  children: [
-    {
-      path: '',
-      name: 'home',
-      component: lazyLoading('home')
-    },
-    ...generateMenuRoutes(menu.state.modules, [])
-  ],
+  children: generateMenuRoutes(menuRoutes, [{
+    path: '',
+    name: 'home',
+    component: lazyLoading('home')
+  }]),
   beforeEnter: requiredLogin
 }]
 
@@ -74,10 +72,9 @@ const router = new Router({
   ]
 })
 
-function generateMenuRoutes (modules, routes) {
-  return [].concat.apply(routes, Object.keys(modules).map((moduleKey) => {
-    return modules[moduleKey].routes
-  }))
+function generateMenuRoutes (menuRoutes, routes) {
+  menuRoutes = menuRoutes.filter(routes => routes && routes.length)
+  return [].concat.apply(routes, menuRoutes)
 }
 
 export default router

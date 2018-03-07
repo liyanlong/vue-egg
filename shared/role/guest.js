@@ -1,11 +1,10 @@
+const util = require('./util');
 
-const permissions = [
-  {name: '访问权限', code: 'access', desc: '访问查询'},
-];
-
-module.exports = {
-  name: '访问角色',
+module.exports = util.createRole({
+  name: '访客角色',
   code: 'guest',
-  desc: '一般角色',
-  permissions: permissions
-};
+  desc: '一般用户未登录浏览角色权限',
+  permissions: [
+    {name: '访问权限', code: 'access', desc: '访问查询'}
+  ]
+});

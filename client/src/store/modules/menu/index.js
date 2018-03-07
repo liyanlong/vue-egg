@@ -1,23 +1,53 @@
-import lazyLoading from './lazyLoading'
-import products from './products'
-import systems from './systems'
+// import products from './products'
+// import systems from './systems'
+const moduleMenus = []
+const menuRoutes = []
+const context = require.context('./', false, /[^index|util]\.js$/)
+
+context.keys().forEach(key => {
+  const {menus, routes} = context(key).default
+  moduleMenus.push(menus)
+  menuRoutes.push(routes)
+})
 
 const state = {
-  modules: {
-    products,
-    systems
-  }
+  moduleMenus
 }
 
-function filterModuleMenus (user, moduleMenus) {
+/**
+ * 过滤模块菜单
+ *
+ * @param {*} moduleMenus 模块菜单
+ * @param {*} permissions 权限数据
+ */
+function filterModuleMenus (moduleMenus, permissions) {
+  function filterItem (item) {
+    const code = item['meta']['code']
+    return !!permissions[code]
+  }
+  moduleMenus = moduleMenus.filter((modMenu) => {
+    // 如果父组件要求权限
+    if (modMenu['meta'] && modMenu['meta']['authority']) {
+      return filterItem(modMenu)
+    }
+    if (modMenu['children']) {
+      modMenu['children'] = filterModuleMenus(modMenu['children'], permissions)
+    }
+    return true
+  })
   return moduleMenus
 }
 
 const getters = {
   // 一级模块菜单
-  moduleMenus (state, getters, rootState) {
-    return Object.keys(state.modules).map(moduleKey => {
-      return state.modules[moduleKey].moduleMenu
+  moduleMenus (state, getters, rootState, rootGetters) {
+    const permissions = rootGetters['auth/permissions']
+    return state.moduleMenus.filter(menu => {
+      if (menu['meta'] && menu['meta']['authority'] && menu['meta']['code']) {
+        const code = menu['meta']['code']
+        return !!permissions[code]
+      }
+      return true
     })
   },
 
@@ -38,14 +68,12 @@ const getters = {
     return activeModule['path']
   },
 
-  activeModuleMenus (state, getters, rootState) {
+  activeModuleMenus (state, getters, rootState, rootGetters) {
     let activeModule = getters.activeModule
     if (!activeModule) {
       return []
     }
-
-    // filter user menu
-    return filterModuleMenus({}, activeModule['children'])
+    return filterModuleMenus(activeModule['children'], rootGetters['auth/permissions'])
   },
 
   activeModuleMenuItem (state, getters, rootState) {
@@ -84,5 +112,5 @@ export default {
 }
 
 export {
-  lazyLoading
+  menuRoutes
 }

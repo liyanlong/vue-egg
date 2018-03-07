@@ -12,5 +12,8 @@ module.exports = {
       CODE_LIST[permission['code']] = 1
     }
     return CODE_LIST
+  },
+  getAllPermissions () {
+    return PERMISSIONS;
   }
 }

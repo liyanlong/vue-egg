@@ -38,6 +38,9 @@
 ```bash
 node_modules/.bin/sequelize db:migrate
 node_modules/.bin/sequelize db:seed:all
+
+node_modules/.bin/sequelize db:migrate:undo:all
+node_modules/.bin/sequelize db:seed:undo:all
 ```
 更多命令：[查看](https://github.com/sequelize/cli)
 

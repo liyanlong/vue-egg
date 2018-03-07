@@ -1,19 +1,16 @@
-import lazyLoading from './lazyLoading'
-const getMeta = require('shared/menu').getMeta
+import lazyLoading from '@/utils/lazyLoading'
 
 /**
  * @param {*} itemConfig 选项Item 配置
- * @param {*} index 是否为index
+ * @param {*} index 是否为index入口
  *
  * @return {Object}
  */
 function createItem (itemConfig, index = false) {
-  const metaName = itemConfig['name'].replace(/-/g, '.')
   const item = {
-    ...itemConfig,
-    name: itemConfig['name'],
-    meta: getMeta(metaName)
+    ...itemConfig
   }
+  item['meta'] = item['meta'] || {}
   if (itemConfig['path']) {
     item['path'] = itemConfig['path']
     item['component'] = lazyLoading(itemConfig['path'], index)
@@ -23,18 +20,19 @@ function createItem (itemConfig, index = false) {
   return item
 }
 
-function createRoutes (config) {
-  function getRoute (item) {
-    return {
-      name: item['name'],
-      path: item['path'],
-      component: item['component'],
-      meta: item['meta']
-    }
+function getRoute (item) {
+  const {name, path, component, meta} = item
+  return {
+    name,
+    path,
+    component,
+    meta
   }
+}
 
+function createRoutes (config) {
   const routes = Object.keys(config['items']).map(itemKey => getRoute(config['items'][itemKey]))
-
+  // 模块入口
   routes.unshift(getRoute(config['module']))
   return routes
 }
@@ -42,9 +40,7 @@ function createRoutes (config) {
 /**
  * 三级模块层级关系
  *
- * @param {Object} categories 组别概念
- *
- * @return {Array}
+ * @return {object}
  */
 function createModuleMenu (config) {
   function extend (obj) {
@@ -57,12 +53,16 @@ function createModuleMenu (config) {
     if (!config['categories'][categorieKey]) {
       return null
     }
+    // 模块对应的分类
     const categorieMenu = extend(config['categories'][categorieKey])
+
+    // 分类对应的 item项
     categorieMenu.children = (categorieMenu['items'] || [])
       .map(itemKey => extend(config['items'][itemKey]))
       .filter(itemMenu => !!itemMenu)
+
     return categorieMenu
-  }).filter(categorieMenu => categorieMenu && categorieMenu.children && categorieMenu.children.length > 0)
+  }).filter(categorieMenu => categorieMenu && categorieMenu.children && categorieMenu.children.length)
 
   return moduleMenu
 }
@@ -81,14 +81,11 @@ export function generateMenu (config) {
     config.items[key] = createItem(config.items[key])
   })
 
-  // create Routes
-  const routes = createRoutes(config)
-
-  // create moduleMenu
-  const moduleMenu = createModuleMenu(config)
   return {
-    routes,
-    moduleMenu,
+    // create Routes
+    routes: createRoutes(config),
+    // create moduleMenu
+    menus: createModuleMenu(config),
     config
   }
 }
