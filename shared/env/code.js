@@ -33,17 +33,17 @@ const basicEnv = {
   NETWORK_ERROR: 501
 };
 
-const appEnv = {
-};
+const appEnv = {};
 
 module.exports = {
   envCode: addEnvCode({}, basicEnv, appEnv),
   get: function (name) {
     name = camelCaseToUnderline(name).toUpperCase();
-    const [errCode, errMsg] = this.envCode[name];
+    const errCode = this.envCode[name][0];
+    const errMsg = this.envCode[name][1];
     return {
-      errCode,
-      errMsg
+      errCode: errCode,
+      errMsg: errMsg
     }
   },
   equalCode: function (code, name) {
@@ -55,17 +55,19 @@ module.exports = {
   envCode: addEnvCode({}, basicEnv, appEnv),
   getInfo: function (name) {
     name = camelCaseToUnderline(name).toUpperCase();
-    return Array.isArray(this.envCode[name]) ? this.envCode[name] : [this.envCode[name]];
+    return Array.isArray(this.envCode[name]) ? this.envCode[name] : [this.envCode[name], 'ENOTDEFINED'];
   },
-  getErrCode: function (name) {
-    const [errCode] = this.getInfo(name);
+  getErrCode: function (name) {    
+    const info = this.getInfo(name);
+    const errCode = info[0];
+    
     return errCode;
   },
   getErrMsg: function (name) {
-    const [errCode, errMsg] = this.getInfo(name);
-    return errMsg;
+    const info = this.getInfo(name);
+    return info[1];
   },
   equalCode: function (name, code) {
-    return this.getErrCode(name) === code
+    return this.getErrCode(name) === code;
   }
 }

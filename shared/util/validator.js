@@ -31,13 +31,12 @@ const sharedRule = {
    * 
    * @return {boolean}
    */
-  between (input, min, max) {
+  between: function (input, min, max) {
     min = Number(min);
     max = Number(max);
     if (isNaN(min) || isNaN(max)) {
       throw TypeError('[validate error]. the between function params is not valid!');
     }
-    
     let val;
     if (isString(input)) {
       val = input.length;
@@ -53,7 +52,7 @@ const sharedRule = {
    * 
    * @returns {boolean}
    */
-  email (input) {
+  email: function (input) {
     const reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     return reg.test(input);
@@ -65,7 +64,7 @@ const sharedRule = {
    * 
    * @return {boolean}
    */
-  url (input) {
+  url: function (input) {
     const reg = /^(https?|ftp):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]+)*@)*((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(\/($|[a-zA-Z0-9.,?'\\+&%$#=~_-]+))*$/;
     return reg.test(input)
   },
@@ -76,7 +75,7 @@ const sharedRule = {
    * 
    * @return {boolean}
    */
-  lowercase (str) {
+  lowercase: function (str) {
     return /^[a-z]+$/.test(str);
   },
 
@@ -86,7 +85,7 @@ const sharedRule = {
    * 
    * @return {boolean}
    */
-  uppercase (input) {
+  uppercase: function (input) {
     return /^[A-Z]+$/.test(input);
   },
   
@@ -97,7 +96,7 @@ const sharedRule = {
    * 
    * @return {boolen}
    */
-  alphabets (input) {
+  alphabets: function (input) {
     return /^[A-Za-z]+$/.test(str);
   },
 
@@ -108,14 +107,14 @@ const sharedRule = {
    * 
    * @return {boolean}
    */
-  exp (input, regexp) {
+  exp: function (input, regexp) {
     let reg = new RegExp(regexp);
     return reg.test(input);
   }
 };
 
 // KEYS
-const SHARE_RULES =  Object.keys(sharedRule).join('|');
+const SHARE_RULES = Object.keys(sharedRule).join('|');
 
 
 /**

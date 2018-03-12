@@ -1,19 +1,18 @@
 const menu = require('./menu');
 const role = require('./role');
 
-const PERMISSIONS = [menu, role].reduce((permissions, mod) => {
-  return permissions.concat(mod.permissions);  
+const PERMISSSIONS = [menu, role].reduce((permissions, mod) => {
+  return permissions.concat(mod.getPermissions());  
 }, []);
-
 module.exports = {
-  getSelectedAll () {
-    const CODE_LIST = {};
-    for (let permission of PERMISSIONS) {
-      CODE_LIST[permission['code']] = 1
+  getSelectedAll: function () {
+    const selectedCodeList = {};
+    for (let permission of PERMISSSIONS) {
+      selectedCodeList[permission['code']] = 1;
     }
-    return CODE_LIST
+    return selectedCodeList;
   },
-  getAllPermissions () {
-    return PERMISSIONS;
+  getAllPermissions: function () {
+    return PERMISSSIONS;
   }
 }

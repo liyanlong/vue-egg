@@ -48,9 +48,6 @@ export default {
       searchText: ''
     }
   },
-  created () {
-    console.log(this.activeModuleMenuItemIndex)
-  },
   methods: {
     handlerSelect (key, keyPath) {
       let path = ''

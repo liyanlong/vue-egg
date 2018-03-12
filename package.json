@@ -29,6 +29,7 @@
     "egg-view-nunjucks": "^2.1.4",
     "mysql2": "^1.5.1",
     "node-sass": "^4.7.2",
+    "npm": "^5.7.1",
     "sqlite3": "^3.1.13"
   },
   "devDependencies": {

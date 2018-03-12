@@ -55,11 +55,13 @@ module.exports = {
     },
     form: {
       name: 'product-form',
-      path: '/product/form'
+      path: '/product/form',
+      meta: {icon: '', name: '基本表单', desc: ''}
     },
     table: {
       name: 'product-table',
-      path: '/product/table'
+      path: '/product/table',
+      meta: {icon: '', name: '高级表单', desc: ''}      
     }
   }
 }

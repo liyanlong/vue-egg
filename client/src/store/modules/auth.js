@@ -19,7 +19,9 @@ const getters = {
 const mutations = {
   setInfo (state, info) {
     state._info = info
-    if (info.permissions) {
+    if (info === null) {
+      state._permissions = null
+    } else if (info && info.permissions) {
       state._permissions = JSON.parse(info && info.permissions)
     }
   }

@@ -10,7 +10,7 @@ const VG_ROLES = Symbol('Role#Roles');
 
 module.exports = {
 
-  get roles () {
+  getRoles () {
     if (!this[VG_ROLES]) {
       this[VG_ROLES] = collections.map((role) => {
         const {name, code, desc} = role;
@@ -25,7 +25,7 @@ module.exports = {
   },
 
   // 角色权限
-  get permissions () {
+  getPermissions () {
     if (!this[VG_ROLE_PERMISSIONS]) {
       this[VG_ROLE_PERMISSIONS] = collections.reduce((permissions, role) => {
         return permissions.concat(role.permissions);

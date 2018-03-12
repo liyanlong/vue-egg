@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import '@/styles/index.scss'
 import '@/plugin'
-
 Vue.config.productionTip = false
 
 // require all src files except main.js for coverage.

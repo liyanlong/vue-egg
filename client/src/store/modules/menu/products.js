@@ -1,4 +1,4 @@
 import {generateMenu} from './util'
-import productsConfig from 'shared/menu/products'
+const productsConfig = require('shared/menu/products')
 
 export default generateMenu(productsConfig)

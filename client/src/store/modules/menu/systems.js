@@ -1,4 +1,4 @@
 import {generateMenu} from './util'
-import systemsConfig from 'shared/menu/systems'
+const systemsConfig = require('shared/menu/systems')
 
 export default generateMenu(systemsConfig)

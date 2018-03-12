@@ -1,5 +1,5 @@
 /* eslint no-trailing-spaces: "error" */
-import {unique} from 'shared/util/function'
+const {unique} = require('shared/util/function')
 describe('Unique function', () => {
   it('unique basic array', () => {
     let result = unique([1, '1', 1, '1', '', undefined, null])
@@ -16,7 +16,7 @@ describe('Unique function', () => {
     expect(result).to.have.lengthOf(2)
   })
 
-  it('unique muliple arguments', () => {
+  it('unique mulitiple arguments', () => {
     let result = unique(1, 2, '1', [2, {a: 1}], {a: 1})
     expect(result).to.have.lengthOf(4)
   })
