@@ -20,14 +20,12 @@ module.exports = options => {
 
       // 错误统一输出内容
       ctx.body = {
-        status,
-        error,
         errCode: err.errCode,
-        errMsg: err.msg,
+        errMsg: err.errMsg,
         info: err.info || {}
       };
 
-      // egg-validate 校验 参数异常
+      // egg-validate 的校验, 表示参数异常
       if (status === 422) {
         const [errCode, errMsg] = ctx.app.getEnvCodeInfo('INVALID_PARAM');
         ctx.body.errCode = errCode;

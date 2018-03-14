@@ -20,11 +20,30 @@ module.exports = {
     this[AUTH] = this.session.auth = val;
   },
 
-  codeThrow(envCode = '') {
-    const [errCode, errMsg] = this.app.getEnvCodeInfo(envCode)
+  success (info = {}, localErrMsg = '') {
+    const [errCode, errMsg] = this.app.getEnvCodeInfo('success');
+    this.body = {
+      errCode,
+      info,
+      errMsg: localErrMsg || errMsg
+    };
+  },
+
+  error (envCode, localErrMsg = 'Bad Request', info = {}) {
+    const [errCode, errMsg] = this.app.getEnvCodeInfo(envCode);
+    this.body = {
+      errCode,
+      info,
+      errMsg: localErrMsg || errMsg
+    };
+  },
+
+  codeThrow(envCode = '', data) {
+    const [errCode, errMsg] = this.app.getEnvCodeInfo(envCode);
     this.throw(200, null, {
       errCode,
-      errMsg
+      errMsg,
+      ...data
     })
   }
 }

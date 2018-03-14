@@ -50,7 +50,8 @@ module.exports = {
           // proxyReq.setHeader('x-added', 'foobar')
         },
         onProxyRes: function (proxyRes, req, res) {
-        }
+        },
+        hostRewrite: true
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"

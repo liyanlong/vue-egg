@@ -7,14 +7,14 @@ module.exports = app => {
     * login ()　{
       const {ctx} = this;
       const {username, password} = ctx.request.body;
-      const userinfo = yield ctx.service.user.login(username, password);
-      if (userinfo) {
+      const userInfo = yield ctx.service.user.login(username, password);
+      if (userInfo) {
         // 快速验证是否登录
         ctx.cookies.set('islogin', 'true', {httpOnly: false});
-        ctx.setAuth(userinfo);
-        this.success();
+        ctx.setAuth(userInfo);
+        ctx.success();
       } else {
-        this.error('login_error', '用户名或密码登录失败');        
+        ctx.error('login_error', '用户名或密码登录失败');        
       }
     }
 

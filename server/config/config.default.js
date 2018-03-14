@@ -16,7 +16,7 @@ module.exports = appInfo => {
     keys: 'vue-egg-server',
     middleware: ['authentication'],
     notfound: {
-      pageUrl: '/error/404.html'
+      pageUrl: '/static/error/404.html'
     },
     view: {
       defaultViewEngine: 'nunjucks',
@@ -28,7 +28,7 @@ module.exports = appInfo => {
       root: `${sharedConfig.build.assetsEggViewRoot},${path.resolve(appInfo.baseDir, './app/view')}`
     },
     static: {
-      prefix: '/',
+      prefix: '/static',
       dir: [
         sharedConfig.build.assetsBuildRoot,
         path.resolve(appInfo.baseDir, 'app/public')
@@ -50,7 +50,9 @@ module.exports = appInfo => {
       signed: true
     },
     authentication: {
-      whiteList: ['/', '/api/auth/login'],
+      ignore: function (ctx) {
+        return ['/', '/api/auth/login'].includes(ctx.url);
+      },
       redirect: '/'
     },
     errorHandler: {

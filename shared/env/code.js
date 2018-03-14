@@ -1,6 +1,5 @@
 const util = require('../util');
 const def = util.def;
-const camelCaseToUnderline = util.camelCaseToUnderline;
 
 function addEnvCode (env) {
   var arr = Array.prototype.slice.call(arguments, 1);
@@ -23,7 +22,7 @@ function addEnvCode (env) {
 const basicEnv = {
   SUCCESS: [0, '请求成功'],
   LOGIN_ERROR: [100, '登录失败'],
-  LOGIN_AUTHORIZED_ERROR: [101, '用户登录信息已过期'],
+  AUTHORIZED_ERROR: [101, '用户登录信息已过期'],
   ACTIVATED_ERROR: [102, '用户被禁止冻结'],
   REST_CREATE_ERROR: 200,
   REST_READ_ERROR: 201,
@@ -38,7 +37,7 @@ const appEnv = {};
 module.exports = {
   envCode: addEnvCode({}, basicEnv, appEnv),
   get: function (name) {
-    name = camelCaseToUnderline(name).toUpperCase();
+    name = name.toUpperCase();
     const errCode = this.envCode[name][0];
     const errMsg = this.envCode[name][1];
     return {
@@ -54,7 +53,7 @@ module.exports = {
 module.exports = {
   envCode: addEnvCode({}, basicEnv, appEnv),
   getInfo: function (name) {
-    name = camelCaseToUnderline(name).toUpperCase();
+    name = name.toUpperCase();
     return Array.isArray(this.envCode[name]) ? this.envCode[name] : [this.envCode[name], 'ENOTDEFINED'];
   },
   getErrCode: function (name) {    

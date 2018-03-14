@@ -13,8 +13,9 @@ class UserService extends Service {
     if (!user) {
       return null;
     }
+    // 用户是否被冻结
     if (user.get('is_activated') == '0') {
-      ctx.codeThrow('LOGIN_ACTIVED_ERROR')
+      ctx.codeThrow('LOGIN_ACTIVED_ERROR');
     }
     return user;
   }
