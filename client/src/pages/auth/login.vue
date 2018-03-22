@@ -71,10 +71,10 @@ export default {
         if (valid) {
           this.loading = true
           this.authLogin(this.loginForm).then(() => {
-            console.log('login success')
-            this.loading = false
             this.$router.push({ path: '/' })
-          }).catch(() => {
+          }).catch((response) => {
+            console.log('login error', response)
+          }).finally(() => {
             this.loading = false
           })
         } else {

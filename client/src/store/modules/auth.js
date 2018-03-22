@@ -1,6 +1,5 @@
 import {auth} from '@/api'
 import Cookie from 'js-cookie'
-const sharedEnvCode = require('shared/env/code')
 
 const state = {
   _info: null,
@@ -29,13 +28,7 @@ const mutations = {
 
 const actions = {
   login ({commit}, {username, password}) {
-    return auth.login(username, password).then(data => {
-      if (sharedEnvCode.equalCode('success', data.errCode)) {
-        return data
-      } else {
-        return Promise.reject(data.errMsg)
-      }
-    })
+    return auth.login(username, password)
   },
   getInfo ({getters, commit}) {
     if (getters.info) {

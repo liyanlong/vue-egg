@@ -47,7 +47,7 @@ function handlerNotFound ({data}) {
 }
 
 function handlerError ({data}) {
-  if (!sharedEnvCode.equalCode('success', data.errCode) && data.errMsg) {
+  if (!sharedEnvCode.equalCode('success', data.code)) {
     Message({
       message: `[Error] ` + data.errMsg,
       type: 'error'
@@ -58,7 +58,7 @@ function handlerError ({data}) {
 export default httpClient
 
 export function handlerResponse (response) {
-  if (response.data && sharedEnvCode.equalCode('success', response.data.errCode)) {
+  if (response.data && sharedEnvCode.equalCode('success', response.data.code)) {
     return Promise.resolve(response.data)
   }
   return Promise.reject(response)

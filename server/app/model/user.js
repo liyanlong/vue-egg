@@ -10,9 +10,10 @@ module.exports = app => {
     permissions: TEXT,
     is_activated: BOOLEAN,
     last_login: DATE,
-    is_admin: BOOLEAN,    
-    created_at: DATE,
-    updated_at: DATE
+    is_admin: BOOLEAN,
+  }, {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
   });
 
   User.findByLogin = async function (login, password) {
@@ -26,8 +27,18 @@ module.exports = app => {
     return user;
   }
 
+  User.getPermissions = async function (login) {
+    const {permissions} = await User.findOne({
+      where: {
+        login: login
+      },
+      attributes: ['permissions']
+    });
+    return permissions || '';
+  }
+
   User.prototype.logSignin = function* () {
-    // yield this.update({ last_sign_in_at: new Date() });
+    yield this.update({ last_login: new Date() });
   }
 
   return User;

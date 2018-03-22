@@ -20,6 +20,7 @@ function addEnvCode (env) {
 }
 
 const basicEnv = {
+  ENOTDEFINED: [-1, 'ENOTDEFINED'],
   SUCCESS: [0, '请求成功'],
   LOGIN_ERROR: [100, '登录失败'],
   AUTHORIZED_ERROR: [101, '用户登录信息已过期'],
@@ -36,37 +37,20 @@ const appEnv = {};
 
 module.exports = {
   envCode: addEnvCode({}, basicEnv, appEnv),
-  get: function (name) {
-    name = name.toUpperCase();
-    const errCode = this.envCode[name][0];
-    const errMsg = this.envCode[name][1];
-    return {
-      errCode: errCode,
-      errMsg: errMsg
-    }
-  },
-  equalCode: function (code, name) {
-    const errInfo = this.get(name)
-    return errInfo['errorCode'] === code
-  }
-}
-module.exports = {
-  envCode: addEnvCode({}, basicEnv, appEnv),
   getInfo: function (name) {
-    name = name.toUpperCase();
-    return Array.isArray(this.envCode[name]) ? this.envCode[name] : [this.envCode[name], 'ENOTDEFINED'];
+    name = name ? name.toUpperCase() : 'ENOTDEFINED';
+    const info = this.envCode[name];
+    return Array.isArray(info) ? info : [this.envCode[name], name];
   },
-  getErrCode: function (name) {    
+  getCode: function (name) {    
     const info = this.getInfo(name);
-    const errCode = info[0];
-    
-    return errCode;
+    return info[0];
   },
-  getErrMsg: function (name) {
+  getMsg: function (name) {
     const info = this.getInfo(name);
     return info[1];
   },
   equalCode: function (name, code) {
-    return this.getErrCode(name) === code;
+    return this.getCode(name) === code;
   }
 }

@@ -20,12 +20,12 @@ module.exports = app => {
 
     * logout (ctx) {
       ctx.setAuth(null);
-      this.success();
+      ctx.success();
     }
 
     * info () {
       const {ctx} = this;
-      this.success(ctx.getAuth());
+      ctx.success(ctx.getAuth());
     }
   }
   return AuthController;

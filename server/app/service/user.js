@@ -8,7 +8,7 @@ class UserService extends Service {
   }
 
   * login (login, password) {
-    const {ctx, app} = this;
+    const {ctx} = this;
     const user = yield ctx.model.User.findByLogin(login, ctx.helper.md5(password));
     if (!user) {
       return null;
@@ -18,6 +18,11 @@ class UserService extends Service {
       ctx.codeThrow('LOGIN_ACTIVED_ERROR');
     }
     return user;
+  }
+
+  * getPermissions(login) {
+    const {ctx} = this;
+    return yield ctx.model.User.getPermissions(login)
   }
 
 }

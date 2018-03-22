@@ -3,9 +3,14 @@ module.exports = app => {
     * permissions (ctx) {
       const {username = ''} = ctx.request.query;
       if (!username) {
-        this.error();
+        return ctx.error('INVALID_PARAM');
       }
-      this.success();
+      const permissions = yield ctx.service.user.getPermissions(username);
+      const auth = ctx.getAuth();
+      ctx.success({
+        isadmin: auth.is_admin,
+        permissions
+      });
     }
   };
 };

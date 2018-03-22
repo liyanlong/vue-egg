@@ -7,7 +7,7 @@ module.exports = app => {
       errMsg: 'Forbidden, required role: ' + action
     });
   };
-  app.role.use('user', ctx => !!ctx.getAuth());
-  app.role.use('admin', ctx => !!!ctx.auth.is_admin);
-}
 
+  app.role.use('user', ctx => !!ctx.getAuth());
+  app.role.use('admin', ctx => !!ctx.getAuth().is_admin);
+}

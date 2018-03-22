@@ -4,6 +4,7 @@ const role = require('./role');
 const PERMISSSIONS = [menu, role].reduce((permissions, mod) => {
   return permissions.concat(mod.getPermissions());  
 }, []);
+
 module.exports = {
   getSelectedAll: function () {
     const selectedCodeList = {};
