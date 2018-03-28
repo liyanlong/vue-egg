@@ -21,7 +21,9 @@
       <transition name="slide-fade">
         <side-bar v-show="sidebarOpened" :menus="activeModuleMenus" :active-index="activeModuleMenuItemIndex"></side-bar>
       </transition>
-      <router-view class="app-main"></router-view>
+      <router-view class="app-main">
+        <breadcrumb />
+      </router-view>
     </div>
   </div>
 
@@ -31,6 +33,8 @@
 import TopBar from '@/components/layouts/TopBar'
 import SideBar from '@/components/layouts/SideBar'
 import SearchInput from '@/components/forms/SearchInput'
+import Breadcrumb from '@/components/layouts/Breadcrumb'
+
 import {mapGetters} from 'vuex'
 export default {
   computed: {
@@ -63,7 +67,8 @@ export default {
   components: {
     TopBar,
     SideBar,
-    SearchInput
+    SearchInput,
+    Breadcrumb
   },
   watch: {
     activeModuleMenuItemIndex (val) {
