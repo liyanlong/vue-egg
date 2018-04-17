@@ -1,4 +1,5 @@
 module.exports = app => {
+
   return class UserController extends app.BaseController {
     * permissions (ctx) {
       const {username = ''} = ctx.request.query;
@@ -11,6 +12,12 @@ module.exports = app => {
         isadmin: auth.is_admin,
         permissions
       });
+    }
+
+    * search (ctx) {
+      const {search = ''} = ctx.request.query;
+      const users = yield ctx.service.user.searchUsers(search);
+      ctx.success(users)
     }
   };
 };

@@ -1,22 +1,35 @@
 <template>
   <div class="system">
-    <h3>用户权限编辑</h3>
-    <el-autocomplete
-      v-model="searchText"
-      :fetch-suggestions="querySearchAsync"
-      placeholder="请输入用户名"
-      @select="handleSelect"
-    ></el-autocomplete>
+    <el-form :inline="true" :model="form" @submit.native.prevent class="demo-form-inline">
+      <el-form-item label="用户">
+        <el-autocomplete
+          v-model="handleSearch"
+          :fetch-suggestions="querySearchAsync"
+          placeholder="请输入用户名"
+          @keyup.native.enter="onSubmit"
+          @select="handleSelect">
+        </el-autocomplete>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="onSubmit">查询</el-button>
+      </el-form-item>
+    </el-form>
+
+
   </div>
 </template>
 <script>
 import {mapState} from 'vuex'
+import {getAllPermissions} from 'shared/permission'
 import {user} from '@/api'
 export default {
   data () {
     return {
-      activeNames: [],
-      searchText: ''
+      handleSearch: '',
+      form: {
+        search: ''
+      },
+      permissions: []
     }
   },
   computed: {
@@ -25,15 +38,25 @@ export default {
     })
   },
   created () {
-    console.log(this.moduleMenus)
+    this.permissions = getAllPermissions()
   },
   methods: {
-    querySearchAsync (queryString, fn) {
-      user.getPermissions().then(data => {
+    // 查询用户
+    querySearchAsync (queryString, cb) {
+      user.searchUsers(queryString).then(data => {
+        cb(data.info.map(item => {
+          return {
+            value: `${item['login']} (${item['name']})`
+          }
+        }))
+      }).catch(() => {
+        cb && cb(null)
       })
     },
     handleSelect (item) {
-      console.log(item)
+      this.form.search = item.login
+    },
+    onSubmit () {
     }
   }
 }

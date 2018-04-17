@@ -37,6 +37,32 @@ module.exports = app => {
     return permissions || '';
   }
 
+  /**
+   * 通过匹配最相似的用户
+   * @param {*} search 
+   */
+  User.searchUsers = async function (search) {
+    const users = await User.findAll({
+      where: {
+        [Op.or]: [
+          {
+            login: {
+              [Op.like]: `${search}%`
+            }
+          }, 
+          {
+            email: {
+              [Op.like]: `${search}%`
+            }
+          }
+        ],
+      },
+      attributes: ['id', 'login', 'name', 'email']
+    });
+    return users || [];
+  }
+
+  // 更新登录时间
   User.prototype.logSignin = function* () {
     yield this.update({ last_login: new Date() });
   }

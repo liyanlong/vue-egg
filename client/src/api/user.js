@@ -11,5 +11,13 @@ export default {
     return httpClient.get('/user/permissions', {
       username
     }).then(handlerResponse)
+  },
+
+  searchUsers (search) {
+    return httpClient.get('/user/search', {
+      params: {
+        search
+      }
+    }).then(handlerResponse)
   }
 }

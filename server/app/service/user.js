@@ -22,9 +22,13 @@ class UserService extends Service {
 
   * getPermissions(login) {
     const {ctx} = this;
-    return yield ctx.model.User.getPermissions(login)
+    return yield ctx.model.User.getPermissions(login);
   }
 
+  * searchUsers(search) {
+    const {ctx} = this;
+    return yield ctx.model.User.searchUsers(search);
+  }
 }
 
 module.exports = UserService;

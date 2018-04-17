@@ -5,7 +5,7 @@ export default {
 
   render (h) {
     return h(
-
-    );
+      Breadrumb
+    )
   }
 }
